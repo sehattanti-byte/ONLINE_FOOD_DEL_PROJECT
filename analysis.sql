@@ -59,12 +59,13 @@ JOIN restaurants r ON o.restaurant_id = r.restaurant_id
 GROUP BY r.city
 ORDER BY avg_delivery_time DESC;
 
--- 8. Late delivery time per  city
-SELECT r.city, AVG(o.delivery_time) AS avg_delivery_time
+-- 8. Late delivery time per city
+SELECT r.city, COUNT(*) AS late_deliveries
 FROM orders o
-JOIN restaurants r ON o.restaurant_id = r.restaurant_id
+JOIN restaurants r ON o.restaurant_id = r.restaurant_id    
+WHERE o.delivery_time > 45  
 GROUP BY r.city
-ORDER BY avg_delivery_time DESC;
+ORDER BY late_deliveries DESC;  
 
 -- Phase 5 : Payment & Discount Analysis
 -- 9. Payment method distribution
